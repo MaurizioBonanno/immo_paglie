@@ -1,0 +1,137 @@
+<% include header.ejs %>
+
+
+<br><br>
+<style>
+    body {
+        background-color: rgb(12, 71, 129);
+        color: floralwhite;
+    }
+    a {
+        color: floralwhite;
+    }
+    .card-text {
+        color: gray;
+    }
+    .card-title {
+        color: gray;
+    }
+</style>
+
+<div class="container" style="padding-top: 2em;">
+     <div class="row justify-content-md-center">
+        <div class="row">
+            <div class="col-s-12">
+             <img src="/images/team_paglieri_migliorata.png" id="teamfoto" style="width: 100%;height: auto;">
+            </div>
+            <div class="col col-s-12">
+                    <h2>IL TEAM PAGLIERI</h2>
+
+                   <p>
+                      <b>Ermanno Paglieri</b> e <b>Tina Addamiano</b>, marito e moglie nella vita e soci fondatori del Team Paglieri Immobiliare,
+                    </p> 
+                    <p>   hanno come obiettivo principale di soddisfare le aspettative di ogni singolo cliente;
+                         per loro nulla viene lasciato al caso....
+                    </p>
+                    
+                    <blockquote >
+                        <i>
+                        "l'abitazione deve accogliere il mondo simbolico di chi la abita, 
+                        la sua intelligenza e la sua esperienza che sono riuscite a trasformare le cose utili 
+                        in cose belle, a trasfigurare magicamente gli spazi necessari in ambienti superflui.
+                         Così, tutto ciò che in una casa sembra inutile, 
+                         diventa indispensabile per distribuire bellezza, per trasmettere un piacere estetico a
+                          chi viene accolto. 
+                          Talvolta, è la bellezza della natura che si sostituisce a quella delle cose: 
+                          allora è sufficiente un muro bianco con una finestra che si apre sul mare o sulla
+                           dolcezza delle colline per cogliere un segno di pura lussuosità..."
+                        </i>
+                    </blockquote>
+                    <p>
+                    Queste parole, tratte dal libro <i>" Il Lusso "</i> eterno desiderio di 
+                    voluttà e bellezza, di <i>Stefano Zecchi,</i> comprendono e sintetizzano, in breve, il pensiero del Team; oltre alla cultura del fare, l'efficienza, la considerazione dei clienti, che completano la nostra  idea di Impresa Immobiliare.
+                    
+                    A noi stessi e a tutti i nostri collaboratori, ricordiamo sempre che ci occupiamo di case: di beni sensibili e investimenti da trattare con la massima cura e attenzione.
+                   </p>
+            </div>
+        </div>
+<br><br><br><br>
+<div class="row"  style="padding-top: 5em;">
+    <div class="col">
+        <h1>Riconoscimenti e formazione</h1>
+    </div>
+</div>
+        <!--inserisco le card-->
+        <div class="row">
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/top50.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Attestato TOP 50</h5>
+                              <p class="card-text">
+                                  Un riconoscimento alle qualità professionali: 
+                                  Un duro lavoro , un aggiornamento continuo, 
+                                  hanno consentito al team Paglieri di entrare
+                                  con diritto 
+                                  tra i primi 50 in Italia
+                                </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/remaxuniversity.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Formazione </h5>
+                              <p class="card-text">
+                                    RE/MAX University è l’innovativa scuola di formazione
+                                    che si dedica al costante miglioramento 
+                                    delle performance dei consulenti
+                                </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/remaxcollection.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Collection</h5>
+                              <p class="card-text">
+                                  l'abilitazione all'utilizzo 
+                                  del Brand dedicato agli immobili di lusso
+                              </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/bocconi.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">SDA Bocconi</h5>
+                              <p class="card-text">
+                                  La frequentazione di una delle maggiori e più prestigiose università Europee
+                             </p>
+                              
+                            </div>
+                          </div>
+            </div>
+        </div>
+
+
+   </div>
+</div>
+<hr>
+
+<script>
+        $.noConflict();
+        jQuery( document ).ready(function( $ ) {
+          $('#teamfoto').hide();
+          $('#teamfoto').fadeIn(2000);
+        });
+</script>
+
+
+<% include footer.ejs %>

@@ -1,0 +1,25 @@
+{
+  "name": "real-admin-enctype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "10.13.0"
+  },
+  "author": "maurizio bonanno",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.6",
+    "fs-extra": "^8.1.0",
+    "mkdirp": "^0.5.1",
+    "mongoose": "^5.7.11",
+    "resize-img": "^2.0.0"
+  }
+}

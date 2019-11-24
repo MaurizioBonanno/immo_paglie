@@ -1,0 +1,48 @@
+<% include header.ejs %>
+
+<body class="bg-light">
+
+        <% include navbar.ejs %>
+
+
+
+
+        <% include main_body.ejs %>
+
+
+        <main role="main" class="container">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Compilare i campi e premere Invio</h6>
+                <div class="media text-muted pt-3">
+
+
+                        <form action="/admin/tipologie/add" method="POST" enctype="multipart/form-data">
+
+
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Indirizzo</label>
+                                  <input type="text" class="form-control" 
+                                  id="indirizzo"
+                                  name="tipologia" 
+                                  required
+                                  placeholder="Località , Via ecc..">
+                                  <small id="emailHelp" class="form-text text-muted">
+                                      es. <i> Citta , Via ecc..</i>
+                                  </small>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Invio</button>
+                        </form>
+                </div>
+        </div>
+        </main>
+
+
+
+
+
+
+</body>
+
+        <% include footer.ejs %>
