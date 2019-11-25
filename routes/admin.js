@@ -7,6 +7,7 @@ const resizeImg = require('resize-img');
 
 const immobili = require('../models/immobili');
 const tipologie = require('../models/tipologie');
+const news = require('../models/news');
 
 //principale di admin
 router.get('/',(req,res)=>{
@@ -24,6 +25,7 @@ router.get('/immobili',(req,res)=>{
     });
     
 });
+
 
 
 //ROTTA GET il form di inserimento di un nuovo immobile
@@ -315,6 +317,62 @@ router.get('/tipologie/delete/:id',(req,res)=>{
      res.redirect('/admin/tipologie');
    });
 });
+
+//Rotta GET di news 
+router.get('/news',(req,res)=>{
+    news.find((err, docs)=>{
+        if(err) return console.log(err);
+        res.render('./backend/list_news.ejs',{
+            title: 'news',
+            news: docs
+        });
+    });
+    
+});
+
+//ROTTA GET il form di inserimento di una news
+router.get('/news/add', function (req, res) {
+    res.render('./backend/add_news.ejs',{
+        title: 'Nuova News'
+      });
+  
+});
+
+//ROTTA POST news add
+router.post('/news/add',(req,res)=>{
+
+    var nameFile = req.files.image.name;
+    var titolo = req.body.titolo;
+    var s=titolo.replace(/\s+/g, '-').toLowerCase();
+    var desc = req.body.descrizione;
+
+    if(req.files.image == ""){
+        return console.log('errore nel file immagine');
+    }
+
+    const doc = new news({
+        slug: s,
+        titolo: titolo,
+        descrizione: desc,
+        image: nameFile
+    });
+
+    doc.save((err)=>{
+        if(err) return console.log(err);
+         var img = req.files.image;
+         //creo la cartella in images/foto_news
+         var path = "public/images/foto_news/"+doc._id;
+         mkdirp(path,(err)=>{
+             if(err) return console.log('errore nella creazione di cartelle:'+err);
+         });
+         var imgPath="public/images/foto_news/"+doc._id+"/"+nameFile;
+         img.mv(imgPath,(err)=>{
+             if(err) return console.log('errore in upload di file:'+err);
+         });
+    });
+    res.redirect('/admin/news');
+});
+
 
 
 module.exports = router;
