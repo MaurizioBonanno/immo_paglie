@@ -373,6 +373,97 @@ router.post('/news/add',(req,res)=>{
     res.redirect('/admin/news');
 });
 
+//ROTTA GET delete news
+router.get('/news/delete/:id', function (req, res) {
+
+    var id= req.params.id;
+    var path = 'public/images/foto_news/'+id;
+    
+    fs.remove(path,(err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            news.findByIdAndRemove(id,(err)=>{
+                if(err) console.log('errore di cancellazione dal dbase news:'+id+",tipo:"+err);
+                res.redirect('/admin/news');
+            });
+        }
+    });
+  
+});
+
+//ROTTA GET edit news
+router.get('/news/edit/:id', function (req, res) {
+    const id = req.params.id;
+    news.findById(id,(err,doc)=>{
+       if(err) return console.log('errore nel recupero della news:' + err);
+       res.render('./backend/edit_news.ejs',{
+            title: doc.titolo,
+            titolo: doc.titolo,
+            descrizione: doc.descrizione,
+            image: doc.image,
+            id: doc.id
+       });
+    });
+});
+
+//Rotta POST news edit
+router.post('/news/edit/:id',(req,res)=>{
+    //recupero l'immagine
+     var imageFile = "";
+     if(req.files != null) {
+         var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";// il nome dell'immagine
+     }
+ 
+     //recupero i campi dalla form
+
+     var titolo = req.body.titolo;
+     var s=titolo.replace(/\s+/g, '-').toLowerCase();
+     var desc = req.body.descrizione;
+     var pimage = req.body.pimage;
+ 
+     var id = req.params.id;
+     
+     //recupero l'immobile
+     news.findById(id,(err, doc) => {
+ 
+         if(err) {
+             console.log(err);
+         }
+
+         doc.slug = s;
+         doc.titolo = titolo;
+         doc.descrizione = desc;
+         if(imageFile != ""){
+             doc.image = imageFile;
+         }
+         doc.save((err)=>{
+            if(err){
+                console.log('errore nel salvataggio in dbase:'+err);
+            }
+ 
+            if(imageFile!=""){
+                //se c'è una nuova immagine rimuovo la vecchia
+                fs.remove('public/images/foto_news/'+id+"/"+pimage, (err)=>{
+                    if(err) console.log('errore in file system nella rimozione della immagine:'+err);
+ 
+                });
+                //recupero il file immagine
+                var img = req.files.image;
+                var path = 'public/images/foto_news/'+id+"/"+imageFile;
+                img.mv(path,(err)=>{
+                    if(err) return console.log('errore nella scrittura del file:'+err);
+                });
+            }
+          res.redirect('/admin/news');
+         });
+     });
+ 
+ 
+ });
+    
+
+
 
 
 module.exports = router;
