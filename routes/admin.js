@@ -86,10 +86,19 @@ router.post('/immobili/add',(req,res)=>{
 
 //ROTTA GET delete immobile
 router.get('/immobili/delete/:id', function (req, res) {
+
+    var id= req.params.id;
+    var path = 'public/images/gallery/'+id;
     
-    immobili.findByIdAndRemove(req.params.id,(err)=>{
-        if(err) console.log(err);
-        
+    fs.remove(path,(err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            immobili.findByIdAndRemove(id,(err)=>{
+                if(err) console.log('errore di cancellazione dal dbase immobile:'+id+",tipo:"+err);
+                res.redirect('/admin/immobili');
+            });
+        }
     });
   
 });
@@ -138,6 +147,73 @@ router.get('/immobili/edit/:id', function (req, res) {
   
 });
 
+//Rotta POST immobili edit
+router.post('/immobili/edit/:id',(req,res)=>{
+   //recupero l'immagine
+    var imageFile = "";
+    if(req.files != null) {
+        var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";// il nome dell'immagine
+    }
+
+    //recupero i campi dalla form
+
+    var indirizzo = req.body.indirizzo;
+    //var nameFile = req.files.image.name;
+    var tipo = req.body.tipologia;
+    var vani = req.body.vani;
+    var camere = req.body.camere;
+    var bagni = req.body.bagni;
+    var titolo = req.body.titolo;
+    var s=titolo.replace(/\s+/g, '-').toLowerCase();
+    var desc = req.body.descrizione;
+    var prezzo = req.body.price;
+    var pimage = req.body.pimage;
+
+    var id = req.params.id;
+    
+    //recupero l'immobile
+    immobili.findById(id,(err, imm) => {
+
+        if(err) {
+            console.log(err);
+        }
+        imm.indirizzo = indirizzo;
+        imm.tipologia = tipo;
+        imm.vani = vani;
+        imm.slug = s;
+        imm.titolo = titolo;
+        imm.descrizione = desc;
+        imm.prezzo = prezzo;
+        imm.camere = camere;
+        imm.bagni = bagni;
+        if(imageFile != ""){
+            imm.image = imageFile;
+        }
+        imm.save((err)=>{
+           if(err){
+               console.log('errore nel salvataggio in dbase:'+err);
+           }
+
+           if(imageFile!=""){
+               //se c'è una nuova immagine rimuovo la vecchia
+               fs.remove('public/images/gallery/'+id+"/"+pimage, (err)=>{
+                   if(err) console.log('errore in file system nella rimozione della immagine:'+err);
+
+               });
+               //recupero il file immagine
+               var img = req.files.image;
+               var path = 'public/images/gallery/'+id+"/"+imageFile;
+               img.mv(path,(err)=>{
+                   if(err) return console.log('errore nella scrittura del file:'+err);
+               });
+           }
+         res.redirect('/admin/immobili');
+        });
+    });
+
+
+});
+
 //POST images gallery
 router.post('/images/gallery/:id',(req,res)=>{
 
@@ -151,6 +227,16 @@ router.post('/images/gallery/:id',(req,res)=>{
 
     res.sendStatus(200);
 
+});
+
+//GET dele image
+router.get('/images/delete/:image',(req,res)=>{
+  //il percorso dell'immagine
+  var path = "public/images/gallery/"+req.query.id+"/"+req.params.image;
+  fs.remove(path, (err)=>{
+      if(err) return console.log(err);
+      res.redirect('/admin/immobili/edit/'+req.query.id);
+  });
 });
 
 
