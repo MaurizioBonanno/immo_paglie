@@ -121,7 +121,7 @@
                                         <label >Image</label>
                                         <input type="file" class="form-control" name="image" id="img" >
                                         <br>
-                                        <img src="/images/gallery/<%= id %>/<%= image %>" id="imagePreview" style="max-width: 100px;max-height:100px;">
+                                        <img src="/images/gallery/<%= id %>/<%= image %>" id="imagePreview" style="max-width: 100px;height:auto;">
                                         <input type="hidden"  name="pimage" value="<%= image %>">
                                 </div>
 
@@ -137,7 +137,7 @@
             <% galleryImages.forEach(function(img){ %>
                 
                 <li style="display: inline-block; list-style: none;">
-                    <img src="/images/gallery/<%= id %>/<%= img %>" style="max-width: 100px;max-height:100px;">
+                    <img src="/images/gallery/<%= id %>/<%= img %>" style="max-width: 100px;height:auto;">
                     <a href="/admin/images/delete/<%= img %>?id=<%= id %>" class="confirmDelete">Delete</a>             
                 </li>
             

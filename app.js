@@ -6,6 +6,9 @@ const configdb = require('./config/dbase');
 const fileUpload = require('express-fileupload');
 const admin_route = require('./routes/admin');
 
+const news = require('./models/news');
+const immobili = require('./models/immobili');
+
 //connetto a mongodb
 mongoose.connect(configdb.mongoURI , {useUnifiedTopology: true, useNewUrlParser: true });
 var db = mongoose.connection;
@@ -50,17 +53,52 @@ app.get('/valutazioni',(req,res)=>{
   res.render('./frontend/it/valutazioni');
 });
 
+
+//ROTTA GET per la vetrina immobiliare
 app.get('/case_da_sogno',(req,res)=>{
-  res.render('./frontend/it/chisiamo');
+  immobili.find((err,listing)=>{
+    if(err) return console.log(err);
+    res.render('./frontend/it/listing', {
+      title: 'listino immobiliare',
+      immobili: listing
+    });
+  });
+  
 });
 
 app.get('/contatti',(req,res)=>{
   res.render('./frontend/it/chisiamo');
 });
 
+
+//ROTTA GET PER LE NEWS
 app.get('/news',(req,res)=>{
-  res.render('./frontend/it/chisiamo');
+  news.find((err,docs)=>{
+    if(err) return console.log(err);
+    res.render('./frontend/it/list_news',{
+      title: 'news',
+      news: docs
+    });
+  });
+  
 });
+
+//ROTTA GET PER La singola new
+app.get('/new/:id',(req,res)=>{
+  news.findById(req.params.id , (err,doc)=>{
+    if(err) return console.log(err);
+    res.render('./frontend/it/new',{
+      title: 'new',
+      img: doc.image,
+      titolo: doc.titolo,
+      desc: doc.descrizione,
+      id: doc._id
+    });
+  });
+  
+});
+
+
 
 
 

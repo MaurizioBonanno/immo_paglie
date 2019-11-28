@@ -1,0 +1,41 @@
+<% include header.ejs %>
+
+<style>
+  .img_new {
+      width: 100;
+      height: auto;
+  }
+  .main {
+      padding-top: 5em;
+      padding-left: 10%;
+      padding-right: 10%;
+  }
+  body {
+      color: aliceblue;
+  }
+</style>
+
+
+<!-- elemento wrapper qui il contenuto è centrato -->
+<div class="container marketing">
+
+    <div class="row main">
+        <div class="col-sm-8">
+            <img class="img_new" src="/images/foto_news/<%= id %>/<%= img %>" alt="">
+        </div>
+        <div class="col-sm-8">
+            <h2><%= titolo %></h2>
+        </div>
+        <div class="col-sm-8">
+            <p>
+               <%= desc %> 
+            </p>
+            
+        </div>
+    </div>
+    
+
+
+</div>
+
+<% include footer.ejs %>
