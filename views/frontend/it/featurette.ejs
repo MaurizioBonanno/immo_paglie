@@ -1,8 +1,11 @@
 
 <style>
   .image_casa {
-    width: 30em;
+    width: 100%;
     height: auto;
+  }
+  .order-md-2 {
+    text-align: right;
   }
 </style>
 
@@ -26,6 +29,7 @@
     <p class="lead">Camere: <%= immobile.camere %></p>
     <p class="lead">Bagni: <%= immobile.bagni %></p>
     <p class="lead">Prezzo: <%= immobile.prezzo %></p>
+    <a href="/casa/<%= immobile._id %>" class="btn btn-primary">Dettagli</a>
   </div>
   <div class="col-md-5">
          

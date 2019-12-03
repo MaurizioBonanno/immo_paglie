@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const configdb = require('./config/dbase');
 const fileUpload = require('express-fileupload');
 const admin_route = require('./routes/admin');
+const fs = require('fs-extra');
 
 const news = require('./models/news');
 const immobili = require('./models/immobili');
@@ -98,6 +99,45 @@ app.get('/new/:id',(req,res)=>{
   
 });
 
+//ROTTA GET per singolo immobile
+app.get('/casa/:id', (req,res) => {
+    var id=req.params.id;
+    immobili.findById(id,(err, immobile)=>{
+      if(err){
+        console.log(err);
+        res.redirect('/case_da_sogno');
+      }else{
+        var galleryDir = "public/images/gallery/"+immobile._id;
+        var galleryImages = null;
+
+        fs.readdir(galleryDir,(err,files)=>{
+             if(err){
+               console.log(err);
+               res.redirect('/case_da_sogno');
+             }else{
+               galleryImages = files;
+               
+               res.render('./frontend/it/casa',{
+                  title: immobile.slug,
+                  id: immobile._id,
+                  indirizzo: immobile.indirizzo,
+                  tipologia: immobile.tipologia,
+                  titolo: immobile.titolo,
+                  descrizione: immobile.descrizione,
+                  vani: immobile.vani,
+                  camere: immobile.camere,
+                  bagni: immobile.bagni,
+                  prezzo: immobile.prezzo,
+                  image: immobile.image,
+                  galleryImages: galleryImages
+               });
+             }
+        });
+      }
+
+    });
+    
+});
 
 
 
