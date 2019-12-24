@@ -6,9 +6,13 @@ const configdb = require('./config/dbase');
 const fileUpload = require('express-fileupload');
 const admin_route = require('./routes/admin');
 const fs = require('fs-extra');
+const passport = require('passport');
 
+
+//SCHEMA E MODELLO
 const news = require('./models/news');
 const immobili = require('./models/immobili');
+const utenti = require('./models/utenti');
 
 //connetto a mongodb
 mongoose.connect(configdb.mongoURI , {useUnifiedTopology: true, useNewUrlParser: true });
@@ -27,11 +31,27 @@ app.set('view engine','ejs');
 
 //set public folder
 app.use(express.static(path.join(__dirname, '/public/')));
+app.use(require('cookie-parser')());
+app.use(require('express-session')({
+  secret:'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+
+
 
 //express-fileupload middleware
 app.use(fileUpload());
 
 app.use('/admin',admin_route);
+
+//PASSPORT MIDDLEWARE
+app.use(passport.initialize());
+app.use(passport.session());
+
+//INTEGRAZIONE FILE CONFIG PASSPORT
+require('./config/passport')(passport);
+
 
 
 app.get('/', function (req, res) {
@@ -139,6 +159,40 @@ app.get('/casa/:id', (req,res) => {
     
 });
 
+app.get('/login',(req,res)=>{
+  res.render('./frontend/it/login');
+});
+
+//crea nuovo utente
+app.post('/sign-in',(req,res)=>{
+  var name = req.body.name;
+  var pssw = req.body.password;
+  utenti.findOne({ name: req.body.name}).then(utente => {
+    if(utente){
+      console.log('utente: '+utente.name);
+      res.send('utente: '+utente.name+',pass:'+utente.password)
+    }else{
+      const nuovoUtente = new utenti({
+        name: req.body.name,
+        password: req.body.password
+      });
+
+      nuovoUtente.save().then(utente =>{
+        res.send('utente salvato');
+      });
+    }
+     
+  });
+});
+
+//LOGIN
+app.post('/login',(req,res,next)=>{
+  passport.authenticate('local',{
+    succesRedirect: '/admin',
+    failureRedirect: '/'
+  })(req,res,next);
+
+});
 
 
 
