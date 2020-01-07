@@ -1,0 +1,122 @@
+<% include header.ejs %>
+
+
+<br><br>
+<style>
+    body {
+        background-color: rgb(12, 71, 129);
+        color: floralwhite;
+    }
+    a {
+        color: floralwhite;
+    }
+    .card-text {
+        color: gray;
+    }
+    .card-title {
+        color: gray;
+    }
+</style>
+
+<div class="container" style="padding-top: 2em;">
+     <div class="row justify-content-md-center">
+        <div class="row">
+            <div class="col-s-12">
+             <img src="/images/team_paglieri_migliorata.png" id="teamfoto" style="width: 100%;height: auto;">
+            </div>
+            <div class="col col-s-12">
+                    <h2>IL TEAM PAGLIERI</h2>
+                    <h3>Operiamo in pieno centro in:</h3>
+                    <p>Via XX Settembre 1/1 , 16121 , Genova</p>
+                    <h3>Puoi contattarci telefonicamente al:</h3>
+                    <p>
+                        <a href="tel:+39 347.11.755.32 " class="btn btn-lg btn-primary" role="button">
+                          <i class="fas fa-phone-square-alt"></i> +39 347.11.755.32 
+                        </a>
+                    </p>
+                    <p>
+                      @mail : <a href="mailto:info@paglierirealestate.it?subject=richiesta%20di%20informazioni">info@paglierirealestate.it</a>
+                    </p>
+
+            </div>
+        </div>
+<br><br><br><br>
+<div class="row"  style="padding-top: 5em;">
+    <div class="col">
+        <h1>Riconoscimenti e formazione</h1>
+    </div>
+</div>
+        <!--inserisco le card-->
+        <div class="row">
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/top50.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Attestato TOP 50</h5>
+                              <p class="card-text">
+                                  Un riconoscimento alle qualità professionali: 
+                                  Un duro lavoro , un aggiornamento continuo, 
+                                  hanno consentito al team Paglieri di entrare
+                                  con diritto 
+                                  tra i primi 50 in Italia
+                                </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/remaxuniversity.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Formazione </h5>
+                              <p class="card-text">
+                                    RE/MAX University è l’innovativa scuola di formazione
+                                    che si dedica al costante miglioramento 
+                                    delle performance dei consulenti
+                                </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/remaxcollection.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Collection</h5>
+                              <p class="card-text">
+                                  l'abilitazione all'utilizzo 
+                                  del Brand dedicato agli immobili di lusso
+                              </p>
+                              
+                            </div>
+                          </div>
+            </div>
+            <div class="col-sm-4"  style="padding-top: 5em;">
+                    <div class="card" style="width: 18rem;">
+                            <img src="/images/bocconi.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">SDA Bocconi</h5>
+                              <p class="card-text">
+                                  La frequentazione di una delle maggiori e più prestigiose università Europee
+                             </p>
+                              
+                            </div>
+                          </div>
+            </div>
+        </div>
+
+
+   </div>
+</div>
+<hr>
+
+<script>
+        $.noConflict();
+        jQuery( document ).ready(function( $ ) {
+          $('#teamfoto').hide();
+          $('#teamfoto').fadeIn(2000);
+        });
+</script>
+
+
+<% include footer.ejs %>

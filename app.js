@@ -88,7 +88,7 @@ app.get('/case_da_sogno',(req,res)=>{
 });
 
 app.get('/contatti',(req,res)=>{
-  res.render('./frontend/it/chisiamo');
+  res.render('./frontend/it/contatti');
 });
 
 

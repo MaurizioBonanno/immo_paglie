@@ -123,6 +123,9 @@
           max-width: 200px;
 
         }
+        .container-sm {
+          color: white;
+        }
       </style>
       
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -152,7 +155,48 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
-            </div>
+      </div>
+
+      <div class="container-sm">
+        <div class="row">
+          <div class="col-sm">
+            <h3>Vani: <%= vani %></h3>
+          </div>
+          <div class="col-sm">
+            <h3>Camere: <%= camere %></h3>
+          </div>
+          <div class="col-sm">
+            <h3>Bagni: <%= bagni %></h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <h1>
+              <%= titolo %>
+            </h1>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm">
+            <h3>
+              <%= descrizione %>
+            </h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>
+             €: <%= prezzo %>
+            </h3>
+            <a href="https://wa.me/393471175532?text=Sarei%20interessato%20ad%20avere%20maggiori%20informazioni%20per%20<%= indirizzo %>%20<%=indirizzo%>%20grazie" target="_blank">
+              <img src="/images/whatsapp.png" alt="contattaci con whatsapp" 
+              style="max-width: 100px; max-height: auto;">
+            </a>
+          </div>
+        </div>
+      
+      </div>
 
 
 </div><!-- Fine content-marketing-->
@@ -204,7 +248,7 @@
       -->
       <div class="col-sm-4">
              <a href="https://wa.me/393471175532?text=Sarei%20interessato%20ad%20avere%20maggiori%20informazioni%20grazie" target="_blank">
-                <img src="/images/whatsapp.png" alt="conttataci con whatsapp" 
+                <img src="/images/whatsapp.png" alt="contattaci con whatsapp" 
                 style="max-width: 100px; max-height: auto;">
               </a>
         </div>
